@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotek! Portland Punk 1979</title>
+    <style>
+        #videoPlayer {
+            width: 640px;
+            height: 480px;
+            position: absolute;
+            left: 200px;
+            top: 150px;
+            cursor: grab;
+        }
+        #videoList {
+            position: absolute;
+            left: 10px;
+            top: 200px;	    
+        }
+	.draggable {
+            width: 100px;
+            height: auto;
+            cursor: grab; /* Cursor changes to a grab hand when hovering */
+        }
+    .dropPlacement1 {
+            position: absolute;
+            left: 16px;
+            top: 60px;	    
+        }
+        .dropPlacement2 {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 266px;
+            height: 653px;	    
+        }
+        .dropPlacement3 {
+            position: absolute;
+            left: 150px;
+            top: 300px;	 
+            width: 445px;
+            height: 806px;   
+        }
+        .dropPlacement4 {
+            position: absolute;
+            left: px;
+            top: px;	    
+            width: 451px;
+            height: 297px;
+        }
+        .dropPlacement5 {
+            position: absolute;
+            left: px;
+            top: px;
+            width: 451px;
+            height: 297px;
+            	    
+        }
+        .dropPlacement6{
+            position: absolute;
+            left: 600px;
+            top: 200px;	
+            width: 629px;
+            height: 821px;    
+        }
+        .dropPlacement7 {
+            position: absolute;
+            left: 200px;
+            top: 300px;
+            width: 821px;
+            height: 629px;	    
+        }
+        .dropPlacement8 {
+            position: absolute;
+            left: 850px;
+            top: 50px;
+            width: 233px;
+            height: 787px;	    
+        }
+    
+    </style>
+</head>
+<body>
+    
+    <div id="videoList">
+        <select id="videoSelector" size="10" onchange="changeVideo()">
+            <option value="houseparty.mp4">House Party</option>
+            <option value="iSuckButt.mp4">I Suck Butt</option>
+	    	<option value="AngelsDont.mp4">Angels Don't</option>
+            <option value="NervousTonight.mp4">Nervous Tonight</option>
+            <option value="WorldGoneMad.mp4">World Gone Mad</option>
+            <option value="LiesFromYou.mp4">Lies From You</option>
+            <option value="RunningDog.mp4">Running Dog</option>
+            <option value="PerfectMe.mp4">Perfect Me</option>
+            <option value="FreedomFighter.mp4">Freedom Fighter</option>
+            <option value="HappySong.mp4">Happy Song</option>	
+            <!-- Add other video options here -->
+        </select>        
+    </div>
+    <img src="cassette.jpg" class="draggable dropPlacement1" id="drag1" style="transform: rotate(5deg);">
+    <img src="songList.jpg" class="draggable dropPlacement2" id="drag2" style="transform: rotate(-15deg);">
+    <img src="newpaperArticle.jpg" class="draggable dropPlacement3" id="drag3" style="transform: rotate(-10deg)">
+    <img src="onStage.jpg" class="draggable dropPlacement4" id="drag4" style="transform: rotate(4deg)">
+    <img src="onStageCloseUp.jpg" class="draggable dropPlacement5" id="drag5" style="transform: rotate(2deg)">
+    <img src="posterStained23Sept.jpg" class="draggable dropPlacement7" id="drag7" style="transform: rotate(-5deg)">
+    <img src="poster24Feb.jpg" class="draggable dropPlacement6" id="drag6" style="transform: rotate(10deg)">
+    <img src="steveLyonsArticle.jpg" class="draggable dropPlacement8" id="drag8" style="transform: rotate(10deg)">
+    </div> 
+    <video id="videoPlayer" controls autoplay class="draggable">
+        <source src="houseparty.mp4" type="video/mp4">
+    </video> 
+    <script src="script.js"></script>
+</body>
+</html>
