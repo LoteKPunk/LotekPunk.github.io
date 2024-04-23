@@ -1,13 +1,18 @@
 document.querySelectorAll('.draggable').forEach(item => {
-    item.addEventListener('mousedown', function(event) {
-        event.preventDefault();
-        
-        const rect = item.getBoundingClientRect();
-        let shiftX = event.clientX - rect.left;
-        let shiftY = event.clientY - rect.top;
+    // Common start drag function
+    function startDrag(event) {
+        event.preventDefault();  // Prevent default behavior (like scrolling and zooming on touch devices)
 
-        // Applying rotation logic (as before)
-        const rotationDegrees = 15;
+        // Determine initial touch point and adjust if it's a touch event
+        const clientX = event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
+        const clientY = event.type.includes('touch') ? event.touches[0].clientY : event.clientY;
+
+        const rect = item.getBoundingClientRect();
+        let shiftX = clientX - rect.left;
+        let shiftY = clientY - rect.top;
+
+        // Assuming the element is rotated, adjust these values
+        const rotationDegrees = 15;  // Example rotation angle
         const center = {
             x: rect.left + rect.width / 2,
             y: rect.top + rect.height / 2
@@ -20,7 +25,8 @@ document.querySelectorAll('.draggable').forEach(item => {
         item.style.zIndex = 1000;
         document.body.append(item);
 
-        let initialAdjusted = adjustMouseForRotation(event.pageX, event.pageY, rotationDegrees, center.x, center.y);
+        // Adjust initial coordinates considering rotation for the first move
+        let initialAdjusted = adjustMouseForRotation(clientX, clientY, rotationDegrees, center.x, center.y);
         moveAt(initialAdjusted.x, initialAdjusted.y);
 
         function moveAt(pageX, pageY) {
@@ -28,22 +34,32 @@ document.querySelectorAll('.draggable').forEach(item => {
             item.style.top = pageY - shiftY + 'px';
         }
 
-        function onMouseMove(event) {
-            let adjustedMouse = adjustMouseForRotation(event.pageX, event.pageY, rotationDegrees, center.x, center.y);
-            moveAt(adjustedMouse.x, adjustedMouse.y);
+        function onMove(event) {
+            const moveX = event.type.includes('touch') ? event.touches[0].pageX : event.pageX;
+            const moveY = event.type.includes('touch') ? event.touches[0].pageY : event.pageY;
+            let moveAdjusted = adjustMouseForRotation(moveX, moveY, rotationDegrees, center.x, center.y);
+            moveAt(moveAdjusted.x, moveAdjusted.y);
             item.style.cursor = 'grabbing';
         }
 
-        document.addEventListener('mousemove', onMouseMove);
+        // Generalize event names
+        const moveEvent = event.type.includes('touch') ? 'touchmove' : 'mousemove';
+        const endEvent = event.type.includes('touch') ? 'touchend' : 'mouseup';
 
-        function onMouseUp(event) {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
+        document.addEventListener(moveEvent, onMove);
+
+        function onEnd(event) {
+            document.removeEventListener(moveEvent, onMove);
+            document.removeEventListener(endEvent, onEnd);
             item.style.cursor = 'grab';
         }
 
-        document.addEventListener('mouseup', onMouseUp);
-    });
+        document.addEventListener(endEvent, onEnd);
+    }
+
+    // Attach both mouse and touch event listeners
+    item.addEventListener('mousedown', startDrag);
+    item.addEventListener('touchstart', startDrag);
 });
 
 function adjustMouseForRotation(mouseX, mouseY, angle, centerX, centerY) {
