@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Function to change video source
     function changeVideo() {
-        var videoPlayer = document.getElementById('videoPlayer');
-        var videoSelector = document.getElementById('videoSelector');
-        videoPlayer.src = videoSelector.value;
+        var selector = document.getElementById('videoSelector');
+        var selectedValue = selector.value;
+        var player = document.getElementById('videoPlayer');
+   
+        player.src = "https://www.youtube.com/embed/" + selectedValue + '?autoplay=1&controls=1';
+//        videoPlayer.src = videoSelector.value;
     }
 
     // Initialize change video on selector change
