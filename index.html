@@ -16,10 +16,18 @@
             position: absolute;
             left: 10px;
             top: 10px;
-            padding: 15px;	
-            margin: 5px;
-                
+            padding: 10px;	
+            margin: 10px;
+            font-size: 16px;
         }
+        /* Responsive styles for mobile devices */
+        @media (max-width: 600px) {
+            .videoList {
+            padding: 12px 20px;  /* Larger padding for easier touch interaction */
+            font-size: 16px;     /* Larger font for better readability */
+        }
+        }
+
 	.draggable {
             width: 100px;
             height: auto;
@@ -28,7 +36,7 @@
         .dropPlacement1 {
             position: absolute;
             left: 16px;
-            top: 60px;
+            top: 200px;
             width: 323px;
             height: 208px;	    
         }
@@ -97,7 +105,7 @@
     <img src="steveLyonsArticle.jpg" class="draggable dropPlacement8" id="drag8" style="transform: rotate(10deg)">
 
     <div id="videoList">
-        <select id="videoSelector" size="10" onchange="changeVideo()">
+        <select id="videoSelector" size="10" font-size=16px onchange="changeVideo()">
             <option value="_8JbvfctbOg">House Party</option>
             <option value="M87Bz4NEzXc">I Suck Butt</option>           
             <option value="v4uHAOj3O7c">Angels Don't</option>
