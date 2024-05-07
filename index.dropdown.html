@@ -9,17 +9,17 @@
             user-select: none;
         }
         .custom-select {
-            position: relative;
-            display: inline-block;
+            position: absolute;
+            display: block;
         }
         .custom-select__trigger {
             position: relative;
             display: flex;
-            align-items: center;
+            align-items:baseline;
             justify-content: space-between;
             padding: 10px 20px;
             font-size: 18px;
-            color: #be4a1f;
+            color: #000000;
             background: #faf6e9;
             border-radius: 5px;
             cursor: pointer;
@@ -30,9 +30,9 @@
             top: 100%;
             left: 0;
             right: 0;
-            border: 1px solid #ccc;
+            border: 0px solid #ccc;
             border-top: none;
-            background: white;
+            background: #faf6e9;
             z-index: 2;
         }
         .custom-option {
@@ -44,7 +44,7 @@
             background-color: #eee;
         }
         .custom-select.open .custom-options {
-            display: block;
+            display: grid;
         }
     </style>
 
@@ -59,13 +59,13 @@
             <span class="custom-option selected" data-value="opt1">House Party</span>
             <span class="custom-option" data-value="opt2">I Suck Butt</span>
             <span class="custom-option" data-value="opt3">Angels Don't</span>
-            <span class="custom-option selected" data-value="opt1">Nervous Tonight</span>
-            <span class="custom-option" data-value="opt2">World Gone Mad</span>
-            <span class="custom-option" data-value="opt3">Lies From You</span>
-            <span class="custom-option selected" data-value="opt1">Running Dog</span>
-            <span class="custom-option" data-value="opt2">Perfect Me</span>
-            <span class="custom-option" data-value="opt3">Happy Song</span>
-        
+            <span class="custom-option" data-value="opt4">NervousTonight</span>
+            <span class="custom-option" data-value="opt5">WorldGoneMad</span>
+            <span class="custom-option" data-value="opt6">Lies From You</span>
+            <span class="custom-option" data-value="opt7">Running Dog</span>
+            <span class="custom-option" data-value="opt8">Perfect Me</span>
+            <span class="custom-option" data-value="opt9">FreedomFighter</span>
+            <span class="custom-option" data-value="opt9">Happy Song</span>
         
         
         
