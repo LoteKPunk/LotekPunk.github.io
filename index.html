@@ -8,28 +8,11 @@
             width: 640px;
             height: 480px;
             position: absolute;
-            left: 150px;
+            left: 225px;
             top: 10px;
             cursor: grab;
         }
-        
-        /* Responsive styles for mobile devices */
-        @media (max-width: 600px) {
-            .videoList {
-            padding: 10px;  /* Larger padding for easier touch */
-            font-size: 1.2em;     /* Larger font for mobile */
-            }
-        }
-
-        #videoList {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            padding: 10px;	
-            margin: 10px;
-            font-size: 16px;
-        }
-	.draggable {
+        .draggable {
             width: 100px;
             height: auto;
             cursor: grab; /* Cursor changes to a grab hand when hovering */
@@ -91,11 +74,55 @@
             width: 233px;
             height: 787px;	    
         }
-    
+        
+        .custom-select-wrapper {
+            position: relative;
+            user-select: none;  
+        }
+        .custom-select {
+            position: absolute;
+            display: block;
+        }
+        .custom-select__trigger {
+            position: relative;
+            display: flex;
+            align-items:baseline;
+            justify-content: left;
+            padding: 20px 20px;
+            font-size: 36px;
+            color: #000000;
+            background: #faf6e9;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .custom-options {
+            position: absolute;
+            display: none;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 0px solid #ccc;
+            border-top: none;
+            background: #faf6e9;
+            z-index: 2;
+        }
+        .custom-option {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+        }
+        .custom-option:hover {
+            background-color: #eee;
+        }
+        .custom-select.open .custom-options {
+            display: grid;
+        }
+        
     </style>
+
 </head>
 <body>
-
     <img src="cassette.jpg" class="draggable dropPlacement1" id="drag1" style="transform: rotate(5deg);">
     <img src="songList.jpg" class="draggable dropPlacement2" id="drag2" style="transform: rotate(-15deg);">
     <img src="newpaperArticle.jpg" class="draggable dropPlacement3" id="drag3" style="transform: rotate(-10deg)">
@@ -105,28 +132,30 @@
     <img src="poster24Feb.jpg" class="draggable dropPlacement6" id="drag6" style="transform: rotate(10deg)">
     <img src="steveLyonsArticle.jpg" class="draggable dropPlacement8" id="drag8" style="transform: rotate(10deg)">
 
-    <div id="videoList">
-        <select id="videoSelector" class="videoList" size="10" onchange="changeVideo()">
-            <option value="_8JbvfctbOg">House Party</option>
-            <option value="M87Bz4NEzXc">I Suck Butt</option>           
-            <option value="v4uHAOj3O7c">Angels Don't</option>
-            <option value="N8W5R4sVQOg">Nervous Tonight</option>
-            <option value="L8ZUaIrnC6Y">World Gone Mad</option>
-            <option value="yGjJWvSGm70">Lies From You</option>
-            <option value="ZOEJniRx1L0">Running Dog</option>
-            <option value="HlGvIPsZkxQ">Perfect Me</option>
-            <option value="yoWRdXoGIiT">Freedom Fighter</option>
-            <option value="KJ1B5Ey6Ze0">Happy Song</option>	
-            <!-- Add other video options here -->
-        </select>        
+<div class="custom-select-wrapper" onclick="toggleDropdown()">
+    <div class="custom-select">
+        <div class="custom-select__trigger"><span>Song List</span>
+            <div class="arrow"></div>
+        </div>
+        <div class="custom-options">
+<!--            <span class="custom-option selected" data-value="https://www.youtube.com/embed/_8JbvfctbOg?autoplay=1&controls=1">House Party</span> -->
+            <span class="custom-option" data-value="https://www.youtube.com/embed/_8JbvfctbOg?autoplay=1&controls=1">House Party</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/M87Bz4NEzXc?autoplay=1&controls=1">I Suck Butt</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/v4uHAOj3O7c?autoplay=1&controls=1">Angels Don't</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/N8W5R4sVQOg?autoplay=1&controls=1">NervousTonight</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/L8ZUaIrnC6Y?autoplay=1&controls=1">WorldGoneMad</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/yGjJWvSGm70?autoplay=1&controls=1">Lies From You</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/ZOEJniRx1L0?autoplay=1&controls=1">Running Dog</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/HlGvIPsZkxQ?autoplay=1&controls=1">Perfect Me</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/yoWRdXoGIiT?autoplay=1&controls=1">FreedomFighter</span>
+            <span class="custom-option" data-value="https://www.youtube.com/embed/KJ1B5Ey6Ze0?autoplay=1&controls=1">Happy Song</span>
+        </div>
     </div>
+</div>
+        
+<iframe id="videoPlayer" src="https://www.youtube.com/embed/_8JbvfctbOg?autoplay=1&controls=1" title="YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            
+<script src="script.js"></script>
 
-<!--    <video id="videoPlayer" controls autoplay class="draggable">
-       <source src="houseparty.mp4" type="video/mp4">
-   </video> -->
-
-    <iframe id="videoPlayer" class="draggable" width="400" src="https://www.youtube.com/embed/_8JbvfctbOg?list=PLJsQGxTZzYPAUKf1yQwLU0vharkoSkKAK" title="LoTek House Party" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- 
-    <script src="script.js"></script>
 </body>
 </html>

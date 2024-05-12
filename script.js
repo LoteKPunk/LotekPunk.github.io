@@ -1,18 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to change video source
-    function changeVideo() {
-        var selector = document.getElementById('videoSelector');
-        var selectedValue = selector.value;
-        var player = document.getElementById('videoPlayer');
-   
-        player.src = "https://www.youtube.com/embed/" + selectedValue + '?autoplay=1&controls=1';
-//        videoPlayer.src = videoSelector.value;
-    }
+function toggleDropdown() {
+    const dropdown = document.querySelector('.custom-select');
+    dropdown.classList.toggle('open');
+}
 
-    // Initialize change video on selector change
-    document.getElementById('videoSelector').addEventListener('change', changeVideo);
-
-    // Function to add drag functionality
+const options = document.querySelectorAll(".custom-option");
+options.forEach(option => {
+    option.addEventListener('click', function() {
+        if (!this.classList.contains('selected')) {
+            const currentSelected = this.parentNode.querySelector('.custom-option.selected');
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+            this.classList.add('selected');
+            this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
+            // Update the iframe src attribute
+            document.getElementById('videoPlayer').src = this.getAttribute('data-value');
+        }
+        toggleDropdown();
+    })
+// Function to add drag functionality
 function makeDraggable(element) {
     let shiftX, shiftY, posX, posY;
 
