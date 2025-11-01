@@ -1,3 +1,3 @@
-Matthew De Denaro  copywrite 2024
+Matthew De Genaro  copywrite 2024
 Lotek Ephermera and Media Website 
 
